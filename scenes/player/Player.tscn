@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dnwnq7joaxkdt"]
+[gd_scene load_steps=16 format=3 uid="uid://dnwnq7joaxkdt"]
 
 [ext_resource type="Script" uid="uid://bm080b23f4pyq" path="res://scripts/player.gd" id="1_180ig"]
 [ext_resource type="Texture2D" uid="uid://d453sdcn42eu" path="res://assets/characters/idle.PNG" id="2_180ig"]
@@ -63,6 +63,10 @@ animations = [{
 radius = 54.0
 height = 108.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_20koh"]
+radius = 65.0
+height = 416.0
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_180ig")
 
@@ -80,3 +84,11 @@ limit_left = 0
 limit_top = 0
 limit_right = 5000
 limit_bottom = 1080
+
+[node name="ItemUseArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemUseArea"]
+position = Vector2(-2, -199)
+shape = SubResource("CapsuleShape2D_20koh")
+
+[connection signal="input_event" from="ItemUseArea" to="." method="_on_item_use_area_input_event"]

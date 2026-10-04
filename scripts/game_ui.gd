@@ -1,12 +1,26 @@
 extends CanvasLayer
 
 @onready var hotspot_label: Label = $HotspotLabel
+@onready var inventory_button: TextureButton = $InventoryButton
+@onready var inventory_panel: PanelContainer = $InventoryPanel
+@onready var item_grid: GridContainer = $InventoryPanel/MarginContainer/ItemGrid
+
+const INVENTORY_SLOT = preload("res://scenes/ui/InventorySlot.tscn")
 
 var hotspot_label_tween: Tween
 
 
 func _ready():
 	hotspot_label.hide()
+
+	InventoryManager.inventory_changed.connect(refresh_inventory)
+	inventory_button.pressed.connect(toggle_inventory)
+
+	inventory_panel.hide()
+
+	refresh_inventory()
+	
+	InventoryManager.selection_changed.connect(_on_inventory_selection_changed)
 
 
 func _process(_delta):
@@ -66,3 +80,27 @@ func hide_hotspot_name():
 	)
 
 	hotspot_label_tween.tween_callback(hotspot_label.hide)
+
+func toggle_inventory():
+	inventory_panel.visible = not inventory_panel.visible
+
+
+func refresh_inventory():
+	# Remove the old visual slots.
+	for child in item_grid.get_children():
+		child.queue_free()
+
+	# Create one visual slot for every item Lea owns.
+	for item in InventoryManager.get_items():
+		var slot = INVENTORY_SLOT.instantiate()
+
+		item_grid.add_child(slot)
+		slot.setup(item)
+
+func _on_inventory_selection_changed(item: InventoryItem):
+	if item == null:
+		return
+
+	inventory_panel.hide()
+
+	print("Selected item: ", item.display_name)

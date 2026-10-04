@@ -140,3 +140,12 @@ func set_walk_limits(left: float, right: float):
 		min_x,
 		max_x
 	)
+
+
+func _on_item_use_area_input_event(_viewport, event, _shape_idx):
+	if event.is_action_pressed("left_click"):
+		if InventoryManager.has_selected_item():
+			InventoryManager.use_selected_item_on(self)
+			
+func use_item(item: InventoryItem):
+	print("Used ", item.display_name, " on Lea")

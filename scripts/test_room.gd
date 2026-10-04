@@ -30,6 +30,9 @@ func _ready():
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			var mouse_world_x = get_global_mouse_position().x
 
+			if InventoryManager.has_selected_item():
+				return
+
+			var mouse_world_x = get_global_mouse_position().x
 			player.walk_to_x(mouse_world_x)
