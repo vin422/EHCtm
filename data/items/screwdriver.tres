@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://dk2cev8rla1vn"]
+
+[ext_resource type="Script" uid="uid://odhxr1uefyo6" path="res://scripts/inventory_item.gd" id="1_bmwqj"]
+[ext_resource type="Texture2D" uid="uid://b0jkx4hsjx75o" path="res://assets/placeholders/screwer.png" id="1_va70u"]
+
+[resource]
+script = ExtResource("1_bmwqj")
+id = "screwdriver"
+display_name = "Screwdriver"
+description = "A rusty screwdriver I dug out of a trash can. How convenient..."
+icon = ExtResource("1_va70u")
+metadata/_custom_type_script = "uid://odhxr1uefyo6"

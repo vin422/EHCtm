@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://d00al3dwgppqb"]
+
+[ext_resource type="Script" uid="uid://xac72eimmhfy" path="res://scripts/npc.gd" id="1_hnoa0"]
+[ext_resource type="Texture2D" uid="uid://dajl5xupcu03e" path="res://assets/placeholders/Screenshot 2026-10-04 083228.png" id="2_g2a5c"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kqela"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_g2a5c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i74hb"]
+radius = 41.0
+height = 396.0
+
+[node name="Npc" type="Area2D"]
+script = ExtResource("1_hnoa0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-4, -213)
+sprite_frames = SubResource("SpriteFrames_kqela")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, -214)
+shape = SubResource("CapsuleShape2D_i74hb")
+
+[node name="InteractionPoint" type="Marker2D" parent="."]
+position = Vector2(-45, -20)
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

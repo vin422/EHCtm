@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmgsovt82iu5f"]
+
+[ext_resource type="Script" uid="uid://c73v6lbv4m5e5" path="res://scripts/game_ui.gd" id="1_3pxe2"]
+[ext_resource type="FontFile" uid="uid://cbkcpwnrvs4e0" path="res://assets/fonts/RememberSummer-e97ap.otf" id="2_jwej7"]
+
+[node name="GameUi" type="CanvasLayer"]
+script = ExtResource("1_3pxe2")
+
+[node name="HotspotLabel" type="Label" parent="."]
+offset_right = 122.0
+offset_bottom = 58.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_jwej7")
+theme_override_font_sizes/font_size = 45
+text = "Window"
