@@ -19,6 +19,7 @@ config/features=PackedStringArray("4.5", "GL Compatibility")
 CursorManager="*res://scripts/cursor_manager.gd"
 GameUI="*res://scenes/ui/GameUI.tscn"
 InventoryManager="*res://scripts/inventory_manager.gd"
+GameFlags="*res://scripts/game_flags.gd"
 
 [display]
 

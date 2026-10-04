@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://dnwnq7joaxkdt"]
+[gd_scene load_steps=18 format=3 uid="uid://dnwnq7joaxkdt"]
 
 [ext_resource type="Script" uid="uid://bm080b23f4pyq" path="res://scripts/player.gd" id="1_180ig"]
+[ext_resource type="Script" uid="uid://c2u8obv7rvb1f" path="res://scripts/item_reaction.gd" id="2_20koh"]
 [ext_resource type="Texture2D" uid="uid://d453sdcn42eu" path="res://assets/characters/idle.PNG" id="2_180ig"]
 [ext_resource type="Texture2D" uid="uid://cofq51xrrmbit" path="res://assets/characters/leawalk/Unnamed/Unnamed_001.png" id="3_ov1oi"]
 [ext_resource type="Texture2D" uid="uid://ddrj3hgb0ndf5" path="res://assets/characters/leawalk/Unnamed/Unnamed_002.png" id="4_rn7t0"]
@@ -12,6 +13,12 @@
 [ext_resource type="Texture2D" uid="uid://d18jlck4ckd4q" path="res://assets/characters/leawalk/Unnamed/Unnamed_008.png" id="10_v5i4m"]
 [ext_resource type="Texture2D" uid="uid://d7jywkyt24sg" path="res://assets/characters/leawalk/Unnamed/Unnamed_009.png" id="11_p1lr0"]
 [ext_resource type="Texture2D" uid="uid://d4dsvqr4t3y8o" path="res://assets/characters/leawalk/Unnamed/Unnamed_010.png" id="12_ro0t8"]
+
+[sub_resource type="Resource" id="Resource_ov1oi"]
+script = ExtResource("2_20koh")
+item_id = "phone"
+action_id = "call_dad"
+metadata/_custom_type_script = "uid://c2u8obv7rvb1f"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5ttev"]
 animations = [{
@@ -69,6 +76,7 @@ height = 416.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_180ig")
+item_reactions = Array[ExtResource("2_20koh")]([SubResource("Resource_ov1oi")])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(5.9999995, -198.99998)

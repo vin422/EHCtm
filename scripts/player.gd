@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@export var item_reactions: Array[ItemReaction] = []
 @export var speed: float = 700.0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -148,4 +149,17 @@ func _on_item_use_area_input_event(_viewport, event, _shape_idx):
 			InventoryManager.use_selected_item_on(self)
 			
 func use_item(item: InventoryItem):
-	print("Used ", item.display_name, " on Lea")
+	for reaction in item_reactions:
+		if reaction.item_id == item.id:
+			_trigger_item_reaction(reaction)
+			return
+
+	print("Can't use ", item.display_name, " on Lea.")
+
+func _trigger_item_reaction(reaction: ItemReaction):
+	print("Triggered action: ", reaction.action_id)
+
+	if reaction.consume_item:
+		InventoryManager.remove_item(reaction.item_id)
+
+	InventoryManager.clear_selection()
