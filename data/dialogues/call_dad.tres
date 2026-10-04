@@ -1,0 +1,59 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=12 format=3 uid="uid://bdf5lasj8fj3y"]
+
+[ext_resource type="Script" uid="uid://coqdr2kew7ran" path="res://scripts/dialogue_line.gd" id="1_xeaei"]
+[ext_resource type="Texture2D" uid="uid://bn35xwkg7qyj" path="res://assets/characters/daphexpressions/Default.PNG" id="2_hinyf"]
+[ext_resource type="Script" uid="uid://c5d7exnv8vcmo" path="res://scripts/dialogue.gd" id="2_k3qqs"]
+[ext_resource type="Texture2D" uid="uid://gdmt1aqfdgb3" path="res://assets/characters/daphexpressions/Angry.PNG" id="3_pdo5o"]
+
+[sub_resource type="Resource" id="Resource_slxae"]
+script = ExtResource("1_xeaei")
+speaker_name = "PHONE"
+text = "...beep beep"
+metadata/_custom_type_script = "uid://coqdr2kew7ran"
+
+[sub_resource type="Resource" id="Resource_qyckv"]
+script = ExtResource("1_xeaei")
+speaker_name = "DAPHNE"
+text = "..."
+portrait = ExtResource("2_hinyf")
+metadata/_custom_type_script = "uid://coqdr2kew7ran"
+
+[sub_resource type="Resource" id="Resource_07vtk"]
+script = ExtResource("1_xeaei")
+speaker_name = "PHONE"
+text = "...beep beep beep..."
+metadata/_custom_type_script = "uid://coqdr2kew7ran"
+
+[sub_resource type="Resource" id="Resource_0wrxy"]
+script = ExtResource("1_xeaei")
+speaker_name = "DAPHNE"
+text = "..."
+portrait = ExtResource("3_pdo5o")
+metadata/_custom_type_script = "uid://coqdr2kew7ran"
+
+[sub_resource type="Resource" id="Resource_7khvk"]
+script = ExtResource("1_xeaei")
+speaker_name = "DAPHNE"
+text = "Ugh, where the hell is he? "
+portrait = ExtResource("3_pdo5o")
+metadata/_custom_type_script = "uid://coqdr2kew7ran"
+
+[sub_resource type="Resource" id="Resource_ug78a"]
+script = ExtResource("1_xeaei")
+speaker_name = "DAPHNE"
+text = "...
+Alright then."
+portrait = ExtResource("2_hinyf")
+metadata/_custom_type_script = "uid://coqdr2kew7ran"
+
+[sub_resource type="Resource" id="Resource_5amtr"]
+script = ExtResource("1_xeaei")
+speaker_name = "DAPHNE"
+text = "EHC, here I come."
+portrait = ExtResource("2_hinyf")
+metadata/_custom_type_script = "uid://coqdr2kew7ran"
+
+[resource]
+script = ExtResource("2_k3qqs")
+lines = Array[ExtResource("1_xeaei")]([SubResource("Resource_slxae"), SubResource("Resource_qyckv"), SubResource("Resource_07vtk"), SubResource("Resource_0wrxy"), SubResource("Resource_7khvk"), SubResource("Resource_ug78a"), SubResource("Resource_5amtr")])
+metadata/_custom_type_script = "uid://c5d7exnv8vcmo"

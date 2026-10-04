@@ -10,3 +10,7 @@ extends Resource
 
 @export var set_flag: String = ""
 @export var set_flag_value: bool = true
+
+@export_file("*.tscn") var change_scene_to: String = ""
+
+@export var dialogue: Dialogue

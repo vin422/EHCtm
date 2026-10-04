@@ -1,0 +1,90 @@
+[gd_scene load_steps=10 format=3 uid="uid://cvf04r287xcr8"]
+
+[ext_resource type="Script" uid="uid://kqo31anquak8" path="res://scripts/test_room.gd" id="1_pr3y7"]
+[ext_resource type="Texture2D" uid="uid://clt8b4tc0wtf6" path="res://assets/backgrounds/labentrancetemp.PNG" id="2_pr3y7"]
+[ext_resource type="PackedScene" uid="uid://dnwnq7joaxkdt" path="res://scenes/player/Player.tscn" id="3_hxwnc"]
+[ext_resource type="PackedScene" uid="uid://jydw53oyk0s1" path="res://scenes/objects/hotspot.tscn" id="4_onx5j"]
+[ext_resource type="PackedScene" uid="uid://d00al3dwgppqb" path="res://scenes/characters/NPC.tscn" id="5_kd1qe"]
+[ext_resource type="PackedScene" uid="uid://bxfpfc77qgv7u" path="res://scenes/objects/pickup.tscn" id="6_jan0f"]
+[ext_resource type="Resource" uid="uid://5jjpv50kxibm" path="res://data/items/phone.tres" id="7_3lmfd"]
+[ext_resource type="Texture2D" uid="uid://fwt6po217wao" path="res://assets/placeholders/phone.png" id="8_0k6md"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ynyd"]
+size = Vector2(80, 152)
+
+[node name="LabEntrance" type="Node2D"]
+script = ExtResource("1_pr3y7")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_pr3y7")
+centered = false
+
+[node name="Player" parent="." instance=ExtResource("3_hxwnc")]
+position = Vector2(175, 978)
+scale = Vector2(1.545, 1.545)
+
+[node name="Camera2D" parent="Player" index="2"]
+limit_right = 7557
+
+[node name="WalkLeftLimit" type="Marker2D" parent="."]
+position = Vector2(187, 984)
+
+[node name="WalkRightLimit" type="Marker2D" parent="."]
+position = Vector2(7417, 980)
+
+[node name="Entry" parent="." instance=ExtResource("4_onx5j")]
+position = Vector2(3678, 512)
+interaction_name = "Window"
+
+[node name="CollisionShape2D" parent="Entry" index="0"]
+position = Vector2(-6, -4)
+
+[node name="InteractionPoint" parent="Entry" index="1"]
+position = Vector2(316, 487)
+
+[node name="Guard1" parent="." instance=ExtResource("5_kd1qe")]
+position = Vector2(3086, 900.99994)
+scale = Vector2(1.42, 1.42)
+character_name = "Guard1"
+
+[node name="InteractionPoint" parent="Guard1" index="2"]
+position = Vector2(-237, -7)
+
+[node name="Guard2" parent="." instance=ExtResource("5_kd1qe")]
+position = Vector2(4248, 860)
+scale = Vector2(1.42, 1.42)
+character_name = "Dr.Boner"
+
+[node name="AnimatedSprite2D" parent="Guard2" index="0"]
+position = Vector2(2.8170252, -187.32397)
+
+[node name="CollisionShape2D" parent="Guard2" index="1"]
+position = Vector2(11.267702, -185.21126)
+
+[node name="InteractionPoint" parent="Guard2" index="2"]
+position = Vector2(-237, -7)
+
+[node name="PhonePickup" parent="." instance=ExtResource("6_jan0f")]
+visible = false
+position = Vector2(2337, 766)
+item = ExtResource("7_3lmfd")
+
+[node name="Sprite2D" parent="PhonePickup" index="0"]
+visible = false
+scale = Vector2(-0.07, -0.07)
+texture = ExtResource("8_0k6md")
+
+[node name="CollisionShape2D" parent="PhonePickup" index="1"]
+visible = false
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_0ynyd")
+
+[node name="InteractionPoint" parent="PhonePickup" index="2"]
+visible = false
+position = Vector2(-385, 237)
+
+[editable path="Player"]
+[editable path="Entry"]
+[editable path="Guard1"]
+[editable path="Guard2"]
+[editable path="PhonePickup"]

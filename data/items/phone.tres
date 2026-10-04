@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://5jjpv50kxibm"]
 
-[ext_resource type="Texture2D" uid="uid://fwt6po217wao" path="res://assets/placeholders/phone.png" id="1_4t1gx"]
+[ext_resource type="Texture2D" uid="uid://c3qsegua5vwt" path="res://assets/items/Phone.PNG" id="1_4t1gx"]
 [ext_resource type="Script" uid="uid://odhxr1uefyo6" path="res://scripts/inventory_item.gd" id="1_6y1hc"]
 
 [resource]

@@ -149,7 +149,12 @@ func _on_item_use_area_input_event(_viewport, event, _shape_idx):
 			InventoryManager.use_selected_item_on(self)
 			
 func use_item(item: InventoryItem):
+	print("USING ITEM ID: [", item.id, "]")
+	print("NUMBER OF REACTIONS: ", item_reactions.size())
+
 	for reaction in item_reactions:
+		print("REACTION ITEM ID: [", reaction.item_id, "]")
+
 		if reaction.item_id != item.id:
 			continue
 
@@ -178,3 +183,13 @@ func _trigger_item_reaction(reaction: ItemReaction):
 		InventoryManager.remove_item(reaction.item_id)
 
 	InventoryManager.clear_selection()
+
+	if reaction.dialogue != null:
+		GameUI.start_dialogue(
+			reaction.dialogue,
+			reaction.change_scene_to
+		)
+		return
+
+	if reaction.change_scene_to != "":
+		GameUI.change_scene_with_fade(reaction.change_scene_to)

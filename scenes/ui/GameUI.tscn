@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmgsovt82iu5f"]
+[gd_scene load_steps=8 format=3 uid="uid://cmgsovt82iu5f"]
 
 [ext_resource type="Script" uid="uid://c73v6lbv4m5e5" path="res://scripts/game_ui.gd" id="1_3pxe2"]
 [ext_resource type="FontFile" uid="uid://cbkcpwnrvs4e0" path="res://assets/fonts/RememberSummer-e97ap.otf" id="2_jwej7"]
-[ext_resource type="Texture2D" uid="uid://dr5phod31b0l" path="res://assets/placeholders/pocketicon.webp" id="3_jwej7"]
+[ext_resource type="Texture2D" uid="uid://vshgpl3fb33m" path="res://assets/items/purseclosed.PNG" id="3_rv83x"]
+[ext_resource type="Texture2D" uid="uid://bk7lg2327efa0" path="res://assets/items/purseopened.PNG" id="4_627l5"]
+[ext_resource type="Texture2D" uid="uid://c84v6y4hheprs" path="res://assets/items/purseclosedclicked.png" id="4_wuuc8"]
 [ext_resource type="PackedScene" uid="uid://ce5qmbljpdi0m" path="res://scenes/ui/InventorySlot.tscn" id="4_xsfm0"]
+[ext_resource type="Texture2D" uid="uid://y4fw8qi8ieop" path="res://assets/characters/daphexpressions/Happy.PNG" id="7_wuuc8"]
 
 [node name="GameUi" type="CanvasLayer"]
 script = ExtResource("1_3pxe2")
@@ -20,25 +23,33 @@ text = "Window"
 [node name="InventoryUI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 854.0
+offset_bottom = 168.0
 
 [node name="PocketButton" type="TextureButton" parent="InventoryUI"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 0
-offset_right = 512.0
-offset_bottom = 512.0
+offset_left = 11.000001
+offset_top = -2.0
+offset_right = 508.7778
+offset_bottom = 531.3334
 scale = Vector2(0.225, 0.225)
-texture_normal = ExtResource("3_jwej7")
+texture_normal = ExtResource("3_rv83x")
+texture_pressed = ExtResource("4_wuuc8")
+texture_hover = ExtResource("4_627l5")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="InventoryContent" type="VBoxContainer" parent="InventoryUI"]
 layout_mode = 0
-offset_left = 112.79
-offset_right = 813.0
-offset_bottom = 135.0
+offset_left = 143.00003
+offset_top = 20.0
+offset_right = 821.0
+offset_bottom = 160.0
 
 [node name="Slots" type="HBoxContainer" parent="InventoryUI/InventoryContent"]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="InventorySlot" parent="InventoryUI/InventoryContent/Slots" instance=ExtResource("4_xsfm0")]
 layout_mode = 2
@@ -63,7 +74,91 @@ layout_mode = 2
 
 [node name="DescriptionLabel" type="Label" parent="InventoryUI/InventoryContent"]
 layout_mode = 2
+size_flags_vertical = 8
 theme_override_constants/outline_size = 9
 theme_override_fonts/font = ExtResource("2_jwej7")
 theme_override_font_sizes/font_size = 31
 text = "Some bullshit ewiruhgsh"
+horizontal_alignment = 1
+
+[node name="DialogueUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DialogueDimmer" type="ColorRect" parent="DialogueUI"]
+modulate = Color(1, 1, 1, 0.4392157)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="DialoguePanel" type="Panel" parent="DialogueUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -446.0
+offset_top = 293.0
+offset_right = 450.0
+offset_bottom = 472.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Portrait" type="TextureRect" parent="DialogueUI/DialoguePanel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -360.0
+offset_right = 325.0
+offset_bottom = 35.0
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("7_wuuc8")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="CharacterName" type="Label" parent="DialogueUI/DialoguePanel"]
+layout_mode = 0
+offset_left = 294.0
+offset_top = 11.0
+offset_right = 887.0
+offset_bottom = 45.0
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_jwej7")
+theme_override_font_sizes/font_size = 22
+text = "DAPHNE"
+
+[node name="DialogueText" type="RichTextLabel" parent="DialogueUI/DialoguePanel"]
+layout_mode = 0
+offset_left = 295.0
+offset_top = 46.0
+offset_right = 904.0
+offset_bottom = 172.0
+theme_override_fonts/normal_font = ExtResource("2_jwej7")
+theme_override_font_sizes/normal_font_size = 28
+text = "Hi losers. Heh. Guess it tells a lot about my dark and mischevious personality. I love Turkey. My teammates are lowk freaky. This stupid C building cat keeps ruining my clothes. "
+
+[node name="FadeOverlay" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="gui_input" from="DialogueUI" to="." method="_on_dialogue_ui_gui_input"]

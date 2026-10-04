@@ -1,16 +1,26 @@
-[gd_scene load_steps=10 format=3 uid="uid://bg2i02iao0h5n"]
+[gd_scene load_steps=12 format=3 uid="uid://bg2i02iao0h5n"]
 
 [ext_resource type="Texture2D" uid="uid://br0nce8b84ifb" path="res://assets/backgrounds/leasroom.PNG" id="1_ibxrp"]
 [ext_resource type="PackedScene" uid="uid://dnwnq7joaxkdt" path="res://scenes/player/Player.tscn" id="1_p7l5n"]
 [ext_resource type="Script" uid="uid://kqo31anquak8" path="res://scripts/test_room.gd" id="1_qb8mh"]
+[ext_resource type="Script" uid="uid://c2u8obv7rvb1f" path="res://scripts/item_reaction.gd" id="4_abjm8"]
 [ext_resource type="PackedScene" uid="uid://jydw53oyk0s1" path="res://scenes/objects/hotspot.tscn" id="4_qb8mh"]
-[ext_resource type="PackedScene" uid="uid://d00al3dwgppqb" path="res://scenes/characters/NPC.tscn" id="5_jpmoy"]
+[ext_resource type="Resource" uid="uid://bdf5lasj8fj3y" path="res://data/dialogues/call_dad.tres" id="5_abjm8"]
 [ext_resource type="PackedScene" uid="uid://bxfpfc77qgv7u" path="res://scenes/objects/pickup.tscn" id="6_cpbye"]
 [ext_resource type="Resource" uid="uid://5jjpv50kxibm" path="res://data/items/phone.tres" id="7_abjm8"]
-[ext_resource type="Texture2D" uid="uid://fwt6po217wao" path="res://assets/placeholders/phone.png" id="8_7sc54"]
+[ext_resource type="Texture2D" uid="uid://c3qsegua5vwt" path="res://assets/items/Phone.PNG" id="8_cpbye"]
+
+[sub_resource type="Resource" id="Resource_7sc54"]
+script = ExtResource("4_abjm8")
+item_id = "phone"
+action_id = "call_dad"
+set_flag = "called_dad"
+change_scene_to = "uid://cvf04r287xcr8"
+dialogue = ExtResource("5_abjm8")
+metadata/_custom_type_script = "uid://c2u8obv7rvb1f"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ynyd"]
-size = Vector2(80, 152)
+size = Vector2(55.233032, 134.35156)
 
 [node name="Bedroom" type="Node2D"]
 script = ExtResource("1_qb8mh")
@@ -22,6 +32,7 @@ centered = false
 [node name="Player" parent="." instance=ExtResource("1_p7l5n")]
 position = Vector2(1056, 985)
 scale = Vector2(1.545, 1.545)
+item_reactions = Array[ExtResource("4_abjm8")]([SubResource("Resource_7sc54")])
 
 [node name="Camera2D" parent="Player" index="2"]
 limit_right = 2710
@@ -39,25 +50,18 @@ interaction_name = "Window"
 [node name="InteractionPoint" parent="Window" index="1"]
 position = Vector2(-145, 578)
 
-[node name="Dad" parent="." instance=ExtResource("5_jpmoy")]
-visible = false
-position = Vector2(1791, 999.99994)
-scale = Vector2(1.75, 1.75)
-character_name = "Father"
-
-[node name="InteractionPoint" parent="Dad" index="2"]
-position = Vector2(-237, -7)
-
 [node name="PhonePickup" parent="." instance=ExtResource("6_cpbye")]
 position = Vector2(2337, 766)
+rotation = 2.0420353
 item = ExtResource("7_abjm8")
 
 [node name="Sprite2D" parent="PhonePickup" index="0"]
 scale = Vector2(-0.07, -0.07)
-texture = ExtResource("8_7sc54")
+texture = ExtResource("8_cpbye")
 
 [node name="CollisionShape2D" parent="PhonePickup" index="1"]
-position = Vector2(0, -4)
+position = Vector2(-2.1854858, -5.503662)
+rotation = -0.32288587
 shape = SubResource("RectangleShape2D_0ynyd")
 
 [node name="InteractionPoint" parent="PhonePickup" index="2"]
@@ -65,5 +69,4 @@ position = Vector2(-385, 237)
 
 [editable path="Player"]
 [editable path="Window"]
-[editable path="Dad"]
 [editable path="PhonePickup"]

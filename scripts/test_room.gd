@@ -28,11 +28,17 @@ func _ready():
 
 
 func _unhandled_input(event):
+	if GameUI.current_dialogue != null:
+		return
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 
+			var mouse_position = get_viewport().get_mouse_position()
+
+			if GameUI.get_node("InventoryUI").get_global_rect().has_point(mouse_position):
+				return
+
 			if InventoryManager.has_selected_item():
-				InventoryManager.clear_selection()
 				return
 
 			var mouse_world_x = get_global_mouse_position().x

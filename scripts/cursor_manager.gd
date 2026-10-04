@@ -1,7 +1,7 @@
 extends Node
 
 const DEFAULT_CURSOR = preload("res://assets/cursors/placeholderpointer.png")
-const INTERACT_CURSOR = preload("res://assets/cursors/handplaceholder.png")
+const INTERACT_CURSOR = preload("res://assets/cursors/hand.PNG")
 
 const DEFAULT_HOTSPOT := Vector2(0, 0)
 const INTERACT_HOTSPOT := Vector2(0, 0)
