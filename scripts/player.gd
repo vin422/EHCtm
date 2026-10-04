@@ -150,14 +150,29 @@ func _on_item_use_area_input_event(_viewport, event, _shape_idx):
 			
 func use_item(item: InventoryItem):
 	for reaction in item_reactions:
-		if reaction.item_id == item.id:
-			_trigger_item_reaction(reaction)
-			return
+		if reaction.item_id != item.id:
+			continue
+
+		if reaction.required_flag != "":
+			if GameFlags.get_flag(reaction.required_flag) != reaction.required_flag_value:
+				print("That interaction is no longer available.")
+				InventoryManager.clear_selection()
+				return
+
+		_trigger_item_reaction(reaction)
+		return
 
 	print("Can't use ", item.display_name, " on Lea.")
+	InventoryManager.clear_selection()
 
 func _trigger_item_reaction(reaction: ItemReaction):
 	print("Triggered action: ", reaction.action_id)
+
+	if reaction.set_flag != "":
+		GameFlags.set_flag(
+			reaction.set_flag,
+			reaction.set_flag_value
+		)
 
 	if reaction.consume_item:
 		InventoryManager.remove_item(reaction.item_id)

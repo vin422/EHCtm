@@ -1,11 +1,10 @@
 extends CanvasLayer
 
 @onready var hotspot_label: Label = $HotspotLabel
-@onready var inventory_button: TextureButton = $InventoryButton
-@onready var inventory_panel: PanelContainer = $InventoryPanel
-@onready var item_grid: GridContainer = $InventoryPanel/MarginContainer/ItemGrid
-
-const INVENTORY_SLOT = preload("res://scenes/ui/InventorySlot.tscn")
+@onready var pocket_button: TextureButton = $InventoryUI/PocketButton
+@onready var inventory_content: VBoxContainer = $InventoryUI/InventoryContent
+@onready var slots: HBoxContainer = $InventoryUI/InventoryContent/Slots
+@onready var description_label: Label = $InventoryUI/InventoryContent/DescriptionLabel
 
 var hotspot_label_tween: Tween
 
@@ -14,13 +13,19 @@ func _ready():
 	hotspot_label.hide()
 
 	InventoryManager.inventory_changed.connect(refresh_inventory)
-	inventory_button.pressed.connect(toggle_inventory)
+	InventoryManager.selection_changed.connect(_on_inventory_selection_changed)
 
-	inventory_panel.hide()
+	pocket_button.pressed.connect(toggle_inventory)
+
+	# Connect hover signals from all 7 inventory slots
+	for slot in slots.get_children():
+		slot.item_hovered.connect(_on_item_hovered)
+		slot.item_unhovered.connect(_on_item_unhovered)
+
+	inventory_content.hide()
+	description_label.text = ""
 
 	refresh_inventory()
-	
-	InventoryManager.selection_changed.connect(_on_inventory_selection_changed)
 
 
 func _process(_delta):
@@ -82,25 +87,36 @@ func hide_hotspot_name():
 	hotspot_label_tween.tween_callback(hotspot_label.hide)
 
 func toggle_inventory():
-	inventory_panel.visible = not inventory_panel.visible
+	inventory_content.visible = not inventory_content.visible
 
 
 func refresh_inventory():
-	# Remove the old visual slots.
-	for child in item_grid.get_children():
-		child.queue_free()
+	var slot_nodes = slots.get_children()
+	var inventory_items = InventoryManager.get_items()
+	var selected_item = InventoryManager.get_selected_item()
 
-	# Create one visual slot for every item Lea owns.
-	for item in InventoryManager.get_items():
-		var slot = INVENTORY_SLOT.instantiate()
+	for i in range(slot_nodes.size()):
+		var slot = slot_nodes[i]
 
-		item_grid.add_child(slot)
-		slot.setup(item)
+		if i < inventory_items.size():
+			var item = inventory_items[i]
+
+			slot.setup(item)
+			slot.set_selected(item == selected_item)
+		else:
+			slot.clear_slot()
 
 func _on_inventory_selection_changed(item: InventoryItem):
 	if item == null:
-		return
+		CursorManager.stop_carrying_item()
+	else:
+		CursorManager.carry_item(item)
 
-	inventory_panel.hide()
+	refresh_inventory()
 
-	print("Selected item: ", item.display_name)
+func _on_item_hovered(item: InventoryItem):
+	description_label.text = item.description
+
+
+func _on_item_unhovered():
+	description_label.text = ""

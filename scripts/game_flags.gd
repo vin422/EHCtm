@@ -1,11 +1,18 @@
 extends Node
 
+signal flag_changed(flag_name: String, value: bool)
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+var flags: Dictionary = {}
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func set_flag(flag_name: String, value: bool = true):
+	flags[flag_name] = value
+	flag_changed.emit(flag_name, value)
+
+
+func get_flag(flag_name: String) -> bool:
+	return flags.get(flag_name, false)
+
+
+func has_flag(flag_name: String) -> bool:
+	return flags.has(flag_name)

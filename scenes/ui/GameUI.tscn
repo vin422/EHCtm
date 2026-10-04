@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmgsovt82iu5f"]
+[gd_scene load_steps=5 format=3 uid="uid://cmgsovt82iu5f"]
 
 [ext_resource type="Script" uid="uid://c73v6lbv4m5e5" path="res://scripts/game_ui.gd" id="1_3pxe2"]
 [ext_resource type="FontFile" uid="uid://cbkcpwnrvs4e0" path="res://assets/fonts/RememberSummer-e97ap.otf" id="2_jwej7"]
 [ext_resource type="Texture2D" uid="uid://dr5phod31b0l" path="res://assets/placeholders/pocketicon.webp" id="3_jwej7"]
+[ext_resource type="PackedScene" uid="uid://ce5qmbljpdi0m" path="res://scenes/ui/InventorySlot.tscn" id="4_xsfm0"]
 
 [node name="GameUi" type="CanvasLayer"]
 script = ExtResource("1_3pxe2")
@@ -16,20 +17,53 @@ theme_override_fonts/font = ExtResource("2_jwej7")
 theme_override_font_sizes/font_size = 45
 text = "Window"
 
-[node name="InventoryButton" type="TextureButton" parent="."]
-offset_right = 145.0
-offset_bottom = 153.0
-texture_normal = ExtResource("3_jwej7")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="InventoryPanel" type="PanelContainer" parent="."]
+[node name="InventoryUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="MarginContainer" type="MarginContainer" parent="InventoryPanel"]
+[node name="PocketButton" type="TextureButton" parent="InventoryUI"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 512.0
+scale = Vector2(0.225, 0.225)
+texture_normal = ExtResource("3_jwej7")
+
+[node name="InventoryContent" type="VBoxContainer" parent="InventoryUI"]
+layout_mode = 0
+offset_left = 112.79
+offset_right = 813.0
+offset_bottom = 135.0
+
+[node name="Slots" type="HBoxContainer" parent="InventoryUI/InventoryContent"]
 layout_mode = 2
 
-[node name="ItemGrid" type="GridContainer" parent="InventoryPanel/MarginContainer"]
+[node name="InventorySlot" parent="InventoryUI/InventoryContent/Slots" instance=ExtResource("4_xsfm0")]
 layout_mode = 2
-columns = 7
+
+[node name="InventorySlot2" parent="InventoryUI/InventoryContent/Slots" instance=ExtResource("4_xsfm0")]
+layout_mode = 2
+
+[node name="InventorySlot3" parent="InventoryUI/InventoryContent/Slots" instance=ExtResource("4_xsfm0")]
+layout_mode = 2
+
+[node name="InventorySlot4" parent="InventoryUI/InventoryContent/Slots" instance=ExtResource("4_xsfm0")]
+layout_mode = 2
+
+[node name="InventorySlot5" parent="InventoryUI/InventoryContent/Slots" instance=ExtResource("4_xsfm0")]
+layout_mode = 2
+
+[node name="InventorySlot6" parent="InventoryUI/InventoryContent/Slots" instance=ExtResource("4_xsfm0")]
+layout_mode = 2
+
+[node name="InventorySlot7" parent="InventoryUI/InventoryContent/Slots" instance=ExtResource("4_xsfm0")]
+layout_mode = 2
+
+[node name="DescriptionLabel" type="Label" parent="InventoryUI/InventoryContent"]
+layout_mode = 2
+theme_override_constants/outline_size = 9
+theme_override_fonts/font = ExtResource("2_jwej7")
+theme_override_font_sizes/font_size = 31
+text = "Some bullshit ewiruhgsh"

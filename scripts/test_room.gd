@@ -32,6 +32,7 @@ func _unhandled_input(event):
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 
 			if InventoryManager.has_selected_item():
+				InventoryManager.clear_selection()
 				return
 
 			var mouse_world_x = get_global_mouse_position().x

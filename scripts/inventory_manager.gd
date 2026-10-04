@@ -4,6 +4,8 @@ signal item_added(item: InventoryItem)
 signal item_removed(item: InventoryItem)
 signal inventory_changed
 
+const MAX_ITEMS: int = 7
+
 
 var items: Array[InventoryItem] = []
 
@@ -12,19 +14,27 @@ var selected_item: InventoryItem = null
 signal selection_changed(item: InventoryItem)
 
 
-func add_item(item: InventoryItem):
+func add_item(item: InventoryItem) -> bool:
 	if item == null:
-		return
+		return false
+
+	if items.size() >= MAX_ITEMS:
+		return false
 
 	items.append(item)
 
 	item_added.emit(item)
 	inventory_changed.emit()
 
+	return true
+
 
 func remove_item(item_id: String):
 	for item in items:
 		if item.id == item_id:
+			if selected_item == item:
+				clear_selection()
+
 			items.erase(item)
 
 			item_removed.emit(item)
