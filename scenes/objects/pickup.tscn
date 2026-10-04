@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxfpfc77qgv7u"]
+
+[ext_resource type="Script" uid="uid://d1jakous80aqd" path="res://scripts/pickup.gd" id="1_ehort"]
+
+[node name="Pickup" type="Area2D"]
+script = ExtResource("1_ehort")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="InteractionPoint" type="Marker2D" parent="."]
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

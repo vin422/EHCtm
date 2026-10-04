@@ -14,3 +14,17 @@ theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("2_jwej7")
 theme_override_font_sizes/font_size = 45
 text = "Window"
+
+[node name="InventoryButton" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="InventoryPanel" type="PanelContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="InventoryPanel"]
+layout_mode = 2
+
+[node name="ItemGrid" type="GridContainer" parent="InventoryPanel/MarginContainer"]
+layout_mode = 2

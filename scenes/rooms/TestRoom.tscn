@@ -1,12 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://bg2i02iao0h5n"]
+[gd_scene load_steps=10 format=3 uid="uid://bg2i02iao0h5n"]
 
 [ext_resource type="Texture2D" uid="uid://br0nce8b84ifb" path="res://assets/backgrounds/leasroom.PNG" id="1_ibxrp"]
 [ext_resource type="PackedScene" uid="uid://dnwnq7joaxkdt" path="res://scenes/player/Player.tscn" id="1_p7l5n"]
 [ext_resource type="Script" uid="uid://kqo31anquak8" path="res://scripts/test_room.gd" id="1_qb8mh"]
 [ext_resource type="PackedScene" uid="uid://jydw53oyk0s1" path="res://scenes/objects/hotspot.tscn" id="4_qb8mh"]
 [ext_resource type="PackedScene" uid="uid://d00al3dwgppqb" path="res://scenes/characters/NPC.tscn" id="5_jpmoy"]
+[ext_resource type="PackedScene" uid="uid://bxfpfc77qgv7u" path="res://scenes/objects/pickup.tscn" id="6_cpbye"]
+[ext_resource type="Resource" uid="uid://5jjpv50kxibm" path="res://data/items/phone.tres" id="7_abjm8"]
+[ext_resource type="Texture2D" uid="uid://fwt6po217wao" path="res://assets/placeholders/phone.png" id="8_7sc54"]
 
-[node name="TestRoom" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ynyd"]
+size = Vector2(80, 152)
+
+[node name="Bedroom" type="Node2D"]
 script = ExtResource("1_qb8mh")
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -26,14 +32,15 @@ position = Vector2(147, 964)
 [node name="WalkRightLimit" type="Marker2D" parent="."]
 position = Vector2(2053, 995)
 
-[node name="Hotspot" parent="." instance=ExtResource("4_qb8mh")]
+[node name="Window" parent="." instance=ExtResource("4_qb8mh")]
 position = Vector2(847, 402)
 interaction_name = "Window"
 
-[node name="InteractionPoint" parent="Hotspot" index="1"]
+[node name="InteractionPoint" parent="Window" index="1"]
 position = Vector2(-145, 578)
 
 [node name="Dad" parent="." instance=ExtResource("5_jpmoy")]
+visible = false
 position = Vector2(1791, 999.99994)
 scale = Vector2(1.75, 1.75)
 character_name = "Father"
@@ -41,6 +48,22 @@ character_name = "Father"
 [node name="InteractionPoint" parent="Dad" index="2"]
 position = Vector2(-237, -7)
 
+[node name="PhonePickup" parent="." instance=ExtResource("6_cpbye")]
+position = Vector2(2337, 766)
+item = ExtResource("7_abjm8")
+
+[node name="Sprite2D" parent="PhonePickup" index="0"]
+scale = Vector2(-0.07, -0.07)
+texture = ExtResource("8_7sc54")
+
+[node name="CollisionShape2D" parent="PhonePickup" index="1"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_0ynyd")
+
+[node name="InteractionPoint" parent="PhonePickup" index="2"]
+position = Vector2(-385, 237)
+
 [editable path="Player"]
-[editable path="Hotspot"]
+[editable path="Window"]
 [editable path="Dad"]
+[editable path="PhonePickup"]
